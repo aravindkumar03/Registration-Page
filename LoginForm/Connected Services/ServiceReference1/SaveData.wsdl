@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SaveFormData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gender" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="courses" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="total" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveFormDataResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SaveFormDataSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveFormData" />
+  </wsdl:message>
+  <wsdl:message name="SaveFormDataSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveFormDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SaveDataSoap">
+    <wsdl:operation name="SaveFormData">
+      <wsdl:input message="tns:SaveFormDataSoapIn" />
+      <wsdl:output message="tns:SaveFormDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SaveDataSoap" type="tns:SaveDataSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveFormData">
+      <soap:operation soapAction="http://tempuri.org/SaveFormData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SaveDataSoap12" type="tns:SaveDataSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveFormData">
+      <soap12:operation soapAction="http://tempuri.org/SaveFormData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SaveData">
+    <wsdl:port name="SaveDataSoap" binding="tns:SaveDataSoap">
+      <soap:address location="https://localhost:44359/service/SaveData.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SaveDataSoap12" binding="tns:SaveDataSoap12">
+      <soap12:address location="https://localhost:44359/service/SaveData.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
